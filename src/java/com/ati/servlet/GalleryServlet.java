@@ -3,6 +3,7 @@ package com.ati.servlet;
 import com.ati.dao.GalleryDAO;
 import com.ati.model.GalleryImage;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -21,7 +22,7 @@ public class GalleryServlet extends HttpServlet {
     private final GalleryDAO dao = new GalleryDAO();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // 1. Make sure the uploads folder exists inside the deployed app
         String uploadDir = getServletContext().getRealPath("/uploads");
         File dir = new File(uploadDir);
