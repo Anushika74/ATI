@@ -1,0 +1,24 @@
+# NetBeans / Ant build output
+build/
+dist/
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Uploaded files at runtime (keep the folder, ignore contents)
+web/uploads/*
+!web/uploads/README.txt
