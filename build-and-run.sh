@@ -12,8 +12,8 @@
 #    chmod +x build-and-run.sh
 #    ./build-and-run.sh
 #
-#  Override paths if needed, e.g.:
-#    TOMCAT=~/apache-tomcat-9.0.117 ./build-and-run.sh
+#  IMPORTANT: CLOSE NetBeans completely before running this, otherwise
+#  NetBeans keeps re-deploying an old copy of the app over this one.
 # =====================================================================
 set -e
 
@@ -41,6 +41,16 @@ if [ ! -f "$SERVLET_API" ]; then
   exit 1
 fi
 
+# --- stop any standalone Tomcat that might be running ----------------
+"$TOMCAT/bin/shutdown.sh" 2>/dev/null || true
+sleep 2
+
+# --- REMOVE every old/stale deployment of this app -------------------
+echo ">> Removing any old deployments of ATIBadulla ..."
+rm -f  "$TOMCAT/conf/Catalina/localhost/ATIBadulla.xml" 2>/dev/null || true
+rm -rf "$TOMCAT/webapps/ATIBadulla" "$TOMCAT/webapps/ATIBadulla.war" 2>/dev/null || true
+rm -rf "$TOMCAT/work/Catalina/localhost/ATIBadulla" 2>/dev/null || true
+
 # --- build an exploded webapp in /tmp -------------------------------
 APP="/tmp/ATIBadulla"
 rm -rf "$APP"
@@ -58,13 +68,20 @@ find "$SRC/src/java" -name '*.java' > /tmp/ati_sources.txt
 javac -cp "$SERVLET_API:$CONNECTOR" -d "$APP/WEB-INF/classes" @/tmp/ati_sources.txt
 echo ">> Compiled $(wc -l < /tmp/ati_sources.txt) Java files OK."
 
-# 4. deploy to Tomcat (remove any old NetBeans deployment first)
-rm -f  "$TOMCAT/conf/Catalina/localhost/ATIBadulla.xml" 2>/dev/null || true
-rm -rf "$TOMCAT/webapps/ATIBadulla" "$TOMCAT/webapps/ATIBadulla.war"
+# 4. deploy to Tomcat
 cp -r "$APP" "$TOMCAT/webapps/ATIBadulla"
 echo ">> Deployed to $TOMCAT/webapps/ATIBadulla"
 
-# 5. run Tomcat in the foreground (press Ctrl+C to stop)
+# 5. VERIFY the deployed DBUtil contains the connection fix
+echo ">> Verifying the deployed DBUtil.class ..."
+if strings "$TOMCAT/webapps/ATIBadulla/WEB-INF/classes/com/ati/util/DBUtil.class" \
+     | grep -q "allowPublicKeyRetrieval=true"; then
+  echo "   OK: allowPublicKeyRetrieval=true is present. "
+else
+  echo "   !! WARNING: the fix is NOT in the deployed class. Run 'cd ~/ATI && git pull' and re-run."
+fi
+
+# 6. run Tomcat in the foreground (press Ctrl+C to stop)
 echo ">> Starting Tomcat ... open  http://localhost:8080/ATIBadulla/"
 chmod +x "$TOMCAT/bin/"*.sh 2>/dev/null || true
 exec "$TOMCAT/bin/catalina.sh" run
