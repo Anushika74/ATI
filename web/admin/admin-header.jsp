@@ -8,8 +8,8 @@
         response.sendRedirect(ctx + "/admin/login.jsp");
         return;
     }
-    String page = (String) request.getAttribute("adminPage");
-    if (page == null) page = "";
+    String navPage = (String) request.getAttribute("adminPage");
+    if (navPage == null) navPage = "";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +23,11 @@
 <div class="admin-shell">
     <aside class="sidebar">
         <h3>&#9881; ATI Admin</h3>
-        <a href="<%= ctx %>/admin/dashboard.jsp"        class="<%= page.equals("dash")?"active":"" %>">Dashboard</a>
-        <a href="<%= ctx %>/admin/manage-notices.jsp"   class="<%= page.equals("notices")?"active":"" %>">Manage Notices</a>
-        <a href="<%= ctx %>/admin/manage-gallery.jsp"   class="<%= page.equals("gallery")?"active":"" %>">Event Gallery</a>
-        <a href="<%= ctx %>/admin/manage-courses.jsp"   class="<%= page.equals("courses")?"active":"" %>">Manage Courses</a>
-        <a href="<%= ctx %>/admin/manage-results.jsp"   class="<%= page.equals("results")?"active":"" %>">Exam Results</a>
+        <a href="<%= ctx %>/admin/dashboard.jsp"        class="<%= navPage.equals("dash")?"active":"" %>">Dashboard</a>
+        <a href="<%= ctx %>/admin/manage-notices.jsp"   class="<%= navPage.equals("notices")?"active":"" %>">Manage Notices</a>
+        <a href="<%= ctx %>/admin/manage-gallery.jsp"   class="<%= navPage.equals("gallery")?"active":"" %>">Event Gallery</a>
+        <a href="<%= ctx %>/admin/manage-courses.jsp"   class="<%= navPage.equals("courses")?"active":"" %>">Manage Courses</a>
+        <a href="<%= ctx %>/admin/manage-results.jsp"   class="<%= navPage.equals("results")?"active":"" %>">Exam Results</a>
         <hr style="border-color:var(--border);margin:14px 0;">
         <a href="<%= ctx %>/index.jsp" target="_blank">View Website &#8599;</a>
         <a href="<%= ctx %>/LogoutServlet" style="color:#ff8a80;">Logout</a>
