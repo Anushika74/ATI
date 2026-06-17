@@ -14,8 +14,8 @@ public class DBUtil {
     // --- Change these to match your MySQL server ---------------------
     private static final String URL =
             "jdbc:mysql://localhost:3306/ati_badulla_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    private static final String USER = "root";
-    private static final String PASS = "";   // <-- put your MySQL root password here
+    private static final String USER = "atiadmin";
+    private static final String PASS = "AtiPass123";   // <-- your MySQL app-user password
     // -----------------------------------------------------------------
 
     static {
