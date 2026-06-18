@@ -22,7 +22,7 @@
 <body>
 <div class="admin-shell">
     <aside class="sidebar">
-        <h3>&#9881; ATI Admin</h3>
+        <h3><img src="<%= ctx %>/images/logo.jpg" alt="ATI" style="height:26px;width:auto;border-radius:4px;vertical-align:middle;margin-right:6px;">ATI Admin</h3>
         <a href="<%= ctx %>/admin/dashboard.jsp"        class="<%= navPage.equals("dash")?"active":"" %>">Dashboard</a>
         <a href="<%= ctx %>/admin/manage-notices.jsp"   class="<%= navPage.equals("notices")?"active":"" %>">Manage Notices</a>
         <a href="<%= ctx %>/admin/manage-gallery.jsp"   class="<%= navPage.equals("gallery")?"active":"" %>">Event Gallery</a>

@@ -15,9 +15,7 @@
 <div class="login-wrap">
     <div class="form-ati login-card">
         <div style="text-align:center;margin-bottom:18px;">
-            <div class="logo" style="width:56px;height:56px;margin:0 auto 10px;border-radius:50%;
-                 background:linear-gradient(135deg,var(--accent),var(--midnight-2));
-                 display:grid;place-items:center;font-weight:800;color:#fff;font-size:1.1rem;">ATI</div>
+            <img src="<%= ctx %>/images/logo.jpg" alt="ATI Badulla" style="height:64px;width:auto;border-radius:8px;margin:0 auto 10px;display:block;">
             <h2 style="color:#fff;">Admin Panel</h2>
             <p style="color:var(--muted);">Sign in to manage the portal</p>
         </div>
