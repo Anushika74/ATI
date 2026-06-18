@@ -18,45 +18,7 @@
 %>
 <jsp:include page="includes/header.jsp"/>
 
-<!-- ===================== CAROUSEL ===================== -->
-<div id="atiCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3500">
-  <div class="carousel-indicators">
-    <% if (slides.isEmpty()) { %>
-        <button type="button" data-bs-target="#atiCarousel" data-bs-slide-to="0" class="active"></button>
-    <% } else { for (int i = 0; i < slides.size(); i++) { %>
-        <button type="button" data-bs-target="#atiCarousel" data-bs-slide-to="<%= i %>"
-                class="<%= i==0?"active":"" %>"></button>
-    <% } } %>
-  </div>
-  <div class="carousel-inner">
-    <% if (slides.isEmpty()) { %>
-        <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80" alt="ATI Badulla">
-            <div class="carousel-caption">
-                <h2>Welcome to ATI Badulla</h2>
-                <p>Upload images from the Admin Panel and mark them "Top 10" to show them here.</p>
-            </div>
-        </div>
-    <% } else {
-         for (int i = 0; i < slides.size(); i++) {
-             GalleryImage g = slides.get(i); %>
-        <div class="carousel-item <%= i==0?"active":"" %>">
-            <img src="<%= ctx %>/<%= g.getImagePath() %>" alt="<%= g.getTitle() %>">
-            <div class="carousel-caption">
-                <h2><%= g.getTitle()==null?"":g.getTitle() %></h2>
-            </div>
-        </div>
-    <%   } } %>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#atiCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#atiCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-</div>
-
-<!-- ===================== NEWS TICKER ===================== -->
+<!-- ===================== NEWS TICKER (shown ABOVE the carousel) ===================== -->
 <div class="newsline">
     <div class="label">&#128226; NEWSLINE</div>
     <div class="track">
@@ -69,6 +31,40 @@
             </span>
         <% } } %>
     </div>
+</div>
+
+<!-- ===================== CAROUSEL (self-contained, auto-sliding) ===================== -->
+<div class="ati-carousel" id="atiCarousel">
+  <div class="ati-slides">
+    <% if (slides.isEmpty()) { %>
+        <div class="ati-slide active ati-slide-placeholder">
+            <div class="ati-cap">
+                <h2>Welcome to ATI Badulla</h2>
+                <p>Upload images from the Admin Panel and mark them "Top 10" to show them here.</p>
+            </div>
+        </div>
+    <% } else {
+         for (int i = 0; i < slides.size(); i++) {
+             GalleryImage g = slides.get(i);
+             String title = g.getTitle()==null ? "" : g.getTitle(); %>
+        <div class="ati-slide <%= i==0?"active":"" %>">
+            <img src="<%= ctx %>/<%= g.getImagePath() %>" alt="<%= title %>">
+            <% if (!title.isEmpty()) { %>
+              <div class="ati-cap"><h2><%= title %></h2></div>
+            <% } %>
+        </div>
+    <%   } } %>
+  </div>
+
+  <% if (slides.size() > 1) { %>
+  <button class="ati-prev" type="button" aria-label="Previous">&#10094;</button>
+  <button class="ati-next" type="button" aria-label="Next">&#10095;</button>
+  <div class="ati-dots">
+    <% for (int i = 0; i < slides.size(); i++) { %>
+        <button class="ati-dot <%= i==0?"active":"" %>" data-i="<%= i %>" type="button"></button>
+    <% } %>
+  </div>
+  <% } %>
 </div>
 
 <!-- ===================== WELCOME + STATS ===================== -->
@@ -106,5 +102,38 @@
     <div style="margin-top:22px;"><a class="btn" href="<%= ctx %>/courses.jsp">View All Courses</a></div>
   </div>
 </div>
+
+<!-- Self-contained carousel script: auto-advances and handles controls.
+     Works even without Bootstrap / internet. -->
+<script>
+(function () {
+    var root = document.getElementById('atiCarousel');
+    if (!root) return;
+    var slides = [].slice.call(root.querySelectorAll('.ati-slide'));
+    var dots   = [].slice.call(root.querySelectorAll('.ati-dot'));
+    if (slides.length < 2) return;            // nothing to rotate
+    var i = 0, timer = null;
+    function show(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach(function (s, x) { s.classList.toggle('active', x === i); });
+        dots.forEach(function (d, x) { d.classList.toggle('active', x === i); });
+    }
+    function next() { show(i + 1); }
+    function prev() { show(i - 1); }
+    function start() { timer = setInterval(next, 3500); }   // auto-switch every 3.5s
+    function restart() { clearInterval(timer); start(); }
+    var nb = root.querySelector('.ati-next'), pb = root.querySelector('.ati-prev');
+    if (nb) nb.addEventListener('click', function () { next(); restart(); });
+    if (pb) pb.addEventListener('click', function () { prev(); restart(); });
+    dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+            show(parseInt(d.getAttribute('data-i'), 10)); restart();
+        });
+    });
+    root.addEventListener('mouseenter', function () { clearInterval(timer); });
+    root.addEventListener('mouseleave', start);
+    start();
+})();
+</script>
 
 <jsp:include page="includes/footer.jsp"/>
