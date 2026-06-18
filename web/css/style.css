@@ -57,7 +57,7 @@ a:hover { color: #fff; }
 /* ---------- Carousel (self-contained, no Bootstrap needed) ---------- */
 .ati-carousel {
     position: relative; width: 100%; height: 460px;
-    overflow: hidden; background: var(--black);
+    overflow: hidden; background: #ffffff;
 }
 .ati-slides { width: 100%; height: 100%; }
 .ati-slide {
@@ -67,7 +67,7 @@ a:hover { color: #fff; }
 .ati-slide.active { opacity: 1; pointer-events: auto; }
 .ati-slide img {
     width: 100%; height: 100%; object-fit: contain; object-position: center;
-    display: block; background: var(--black);
+    display: block; background: #ffffff;
     /* contain -> the WHOLE image is shown (no top/bottom cropping) */
 }
 .ati-slide-placeholder {
