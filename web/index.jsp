@@ -20,7 +20,6 @@
 
 <!-- ===================== NEWS TICKER (shown ABOVE the carousel) ===================== -->
 <div class="newsline">
-    <div class="label">&#128226; NEWSLINE</div>
     <div class="track">
         <% if (ticker.isEmpty()) { %>
             <span class="marquee-item">No notices yet. Check back soon.</span>
