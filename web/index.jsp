@@ -9,11 +9,6 @@
 
     // --- Carousel: top 10 most recent images flagged is_carousel = 1 ---
     List<GalleryImage> slides = new GalleryDAO().findCarousel();
-    // Skip any whose image file is missing on disk (prevents broken/blank slides)
-    slides.removeIf(g -> {
-        String rp = application.getRealPath("/" + g.getImagePath());
-        return rp == null || !new java.io.File(rp).exists();
-    });
 
     // --- Newsline: most recent notices ---
     List<Notice> ticker = new NoticeDAO().findRecent(8);
