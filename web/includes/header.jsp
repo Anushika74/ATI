@@ -18,7 +18,7 @@
 <nav class="navbar-ati">
   <div class="container-ati" style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;flex-wrap:wrap;">
       <a class="brand" href="<%= ctx %>/index.jsp">
-          <img src="<%= ctx %>/images/logo.jpg" alt="ATI Badulla" style="height:42px;width:auto;border-radius:6px;">
+          <img src="<%= ctx %>/images/logo.png" alt="ATI Badulla" style="height:42px;width:auto;border-radius:6px;">
           <span>ATI&nbsp;Badulla</span>
       </a>
       <div class="nav-links" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">

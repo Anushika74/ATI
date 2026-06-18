@@ -15,7 +15,7 @@
 <div class="login-wrap">
     <div class="form-ati login-card">
         <div style="text-align:center;margin-bottom:18px;">
-            <img src="<%= ctx %>/images/logo.jpg" alt="ATI Badulla" style="height:64px;width:auto;border-radius:8px;margin:0 auto 10px;display:block;">
+            <img src="<%= ctx %>/images/logo.png" alt="ATI Badulla" style="height:64px;width:auto;border-radius:8px;margin:0 auto 10px;display:block;">
             <h2 style="color:#fff;">Admin Panel</h2>
             <p style="color:var(--muted);">Sign in to manage the portal</p>
         </div>
