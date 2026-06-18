@@ -222,7 +222,30 @@ table.ati tr:hover td { background: rgba(59,130,246,.08); }
 /* ---------- Footer ---------- */
 .footer-ati {
     background: var(--black); border-top: 1px solid var(--border);
-    padding: 30px 0; color: var(--muted); margin-top: 40px;
+    padding: 48px 0 24px; color: var(--muted); margin-top: 40px;
+}
+.footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 34px;
+}
+@media (max-width: 900px){ .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px){ .footer-grid { grid-template-columns: 1fr; } }
+.footer-ati h4 { color: #fff; font-size: 1.05rem; margin-bottom: 16px; }
+.footer-ati p { color: var(--muted); line-height: 1.7; }
+.footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-brand img { height: 46px; width: auto; border-radius: 6px; }
+.footer-brand span { color: #fff; font-weight: 700; letter-spacing: 1px; font-size: 1.15rem; }
+.footer-links { list-style: none; padding: 0; margin: 0; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+.footer-links a::before { content: "\203A"; color: var(--accent-2); font-weight: 700; }
+.footer-links a:hover { color: #fff; }
+.footer-contact > div { display: flex; gap: 10px; margin-bottom: 14px; align-items: flex-start; }
+.footer-contact .ic { color: var(--accent-2); flex-shrink: 0; }
+.footer-contact a { color: var(--muted); }
+.footer-contact a:hover { color: #fff; }
+.footer-bottom {
+    text-align: center; margin-top: 34px; padding-top: 18px;
+    border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem;
 }
 
 /* ---------- Hero (login) ---------- */
