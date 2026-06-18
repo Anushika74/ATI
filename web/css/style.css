@@ -119,6 +119,18 @@ a:hover { color: #fff; }
 .newsline .track:hover { animation-play-state: paused; }
 .newsline .track span { margin-right: 60px; }
 .newsline .badge-urgent { color: #ff6b6b; font-weight: 700; }
+/* Real-site style marquee items: badge + bullhorn + text + optional download link */
+.newsline .marquee-item {
+    display: inline-flex; align-items: center; gap: 10px; margin-right: 48px;
+}
+.newsline .marquee-item .badge { font-size: .72rem; }
+.newsline .marquee-item .bullhorn { color: var(--accent-2); }
+.newsline .marquee-item .mq-text { color: var(--text); }
+.newsline .marquee-item a {
+    background: var(--accent); color: #fff; padding: 2px 12px;
+    border-radius: 14px; font-size: .76rem; font-weight: 600;
+}
+.newsline .marquee-item a:hover { background: var(--accent-2); color: #fff; }
 @keyframes ticker {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-100%); }

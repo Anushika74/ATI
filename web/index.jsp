@@ -23,11 +23,16 @@
     <div class="label">&#128226; NEWSLINE</div>
     <div class="track">
         <% if (ticker.isEmpty()) { %>
-            <span>No notices yet. Check back soon.</span>
-        <% } else { for (Notice n : ticker) { %>
-            <span>
-                <% if ("URGENT".equals(n.getPriority())) { %><span class="badge-urgent">[URGENT]</span> <% } %>
-                <%= n.getTitle() %> &mdash; <%= n.getContent()==null?"":n.getContent() %>
+            <span class="marquee-item">No notices yet. Check back soon.</span>
+        <% } else { for (Notice n : ticker) {
+             String pr = (n.getPriority()==null || n.getPriority().isEmpty()) ? "NORMAL" : n.getPriority(); %>
+            <span class="marquee-item">
+                <span class="badge badge-<%= pr %>"><%= pr %></span>
+                <span class="bullhorn">&#128227;</span>
+                <span class="mq-text"><%= n.getTitle() %><% if (n.getContent()!=null && !n.getContent().isEmpty()) { %> &mdash; <%= n.getContent() %><% } %></span>
+                <% if (n.getLink()!=null && !n.getLink().trim().isEmpty()) { %>
+                    <a href="<%= n.getLink() %>" target="_blank" rel="noopener">Download</a>
+                <% } %>
             </span>
         <% } } %>
     </div>

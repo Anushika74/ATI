@@ -37,6 +37,10 @@
         <% } %>
     </select>
 
+    <label>Download / More Link (optional)</label>
+    <input type="text" name="link" placeholder="https://... (e.g. a Google Drive file)"
+           value="<%= editing!=null && editing.getLink()!=null ? editing.getLink() : "" %>">
+
     <button class="btn" type="submit"><%= editing!=null?"Update Notice":"Add Notice" %></button>
     <% if (editing != null) { %>
         <a class="btn btn-ghost" href="<%= ctx %>/admin/manage-notices.jsp">Cancel</a>

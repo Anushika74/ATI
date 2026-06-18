@@ -17,6 +17,8 @@ public class NoticeDAO {
         n.setTitle(rs.getString("title"));
         n.setContent(rs.getString("content"));
         n.setPriority(rs.getString("priority"));
+        // 'link' column is optional - tolerate databases that don't have it yet
+        try { n.setLink(rs.getString("link")); } catch (Exception ignore) { }
         n.setNoticeDate(String.valueOf(rs.getDate("notice_date")));
         return n;
     }
@@ -59,24 +61,26 @@ public class NoticeDAO {
     }
 
     public void insert(Notice n) {
-        String sql = "INSERT INTO notices (title, content, priority) VALUES (?,?,?)";
+        String sql = "INSERT INTO notices (title, content, priority, link) VALUES (?,?,?,?)";
         try (Connection con = DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, n.getTitle());
             ps.setString(2, n.getContent());
             ps.setString(3, n.getPriority());
+            ps.setString(4, n.getLink());
             ps.executeUpdate();
         } catch (Exception e) { e.printStackTrace(); }
     }
 
     public void update(Notice n) {
-        String sql = "UPDATE notices SET title=?, content=?, priority=? WHERE id=?";
+        String sql = "UPDATE notices SET title=?, content=?, priority=?, link=? WHERE id=?";
         try (Connection con = DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, n.getTitle());
             ps.setString(2, n.getContent());
             ps.setString(3, n.getPriority());
-            ps.setInt(4, n.getId());
+            ps.setString(4, n.getLink());
+            ps.setInt(5, n.getId());
             ps.executeUpdate();
         } catch (Exception e) { e.printStackTrace(); }
     }

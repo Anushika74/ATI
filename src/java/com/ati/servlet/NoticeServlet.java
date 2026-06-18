@@ -22,6 +22,7 @@ public class NoticeServlet extends HttpServlet {
             n.setTitle(req.getParameter("title"));
             n.setContent(req.getParameter("content"));
             n.setPriority(req.getParameter("priority"));
+            n.setLink(req.getParameter("link"));
             dao.insert(n);
 
         } else if ("update".equals(action)) {
@@ -30,6 +31,7 @@ public class NoticeServlet extends HttpServlet {
             n.setTitle(req.getParameter("title"));
             n.setContent(req.getParameter("content"));
             n.setPriority(req.getParameter("priority"));
+            n.setLink(req.getParameter("link"));
             dao.update(n);
         }
         resp.sendRedirect(req.getContextPath() + "/admin/manage-notices.jsp");

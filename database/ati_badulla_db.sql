@@ -34,6 +34,7 @@ CREATE TABLE notices (
     title       VARCHAR(200) NOT NULL,
     content     TEXT,
     priority    VARCHAR(20)  DEFAULT 'NORMAL',  -- NORMAL / HIGH / URGENT
+    link        VARCHAR(255),                   -- optional Download / More link
     notice_date DATE         DEFAULT (CURRENT_DATE),
     created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
 );

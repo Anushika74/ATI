@@ -28,6 +28,7 @@
           <a href="<%= ctx %>/gallery.jsp" class="<%= active.equals("gallery")?"active":"" %>">Gallery</a>
           <a href="<%= ctx %>/results.jsp" class="<%= active.equals("results")?"active":"" %>">Results</a>
           <a href="<%= ctx %>/contact.jsp" class="<%= active.equals("contact")?"active":"" %>">Contact Us</a>
+          <a href="https://lms.sliate.ac.lk" target="_blank" rel="noopener">LMS</a>
           <a href="<%= ctx %>/admin/login.jsp" class="btn-admin">Admin Login</a>
       </div>
   </div>
